@@ -1,3 +1,9 @@
+/* Genotype Reader v1.5 alpha.
+ * Copyright: sirkostya009
+ * License: Apache 2.0
+ * This update features algorithm update (or maybe its total overhaul) but im really lazy to do so, cause i have no idea how to do it right, smart ppl pls help.
+ */
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -10,9 +16,10 @@ struct Gene {
 using Genotype = std::vector<Gene>;
 using str = std::string;
 
-bool g_uniqueOnly{};
-bool g_pack{};
-
+namespace {
+	bool g_uniqueOnly{};
+	bool g_pack{};
+}
 
 void parseGenotype(str& str_genotype, Genotype& genotype) {
 	genotype.resize(str_genotype.length() / 2);
@@ -156,10 +163,6 @@ char returnAllele(Gene& gene, bool isDominant) {
 str genesBuilder(Genotype& genotype, int& i) {
 	std::vector<bool> bools{ decideBools(i, genotype.size()) };
 
-	for (bool playlist : bools)
-		std::cout << playlist;
-	std::cout << '\n';
-
 	str genes{};
 
 	for (int j{}; j < genotype.size(); ++j)
@@ -268,8 +271,8 @@ void createGeneration(Genotype& genotype1, Genotype& genotype2) {
 		print_str_Vector(breeds);
 		//if (!g_uniqueOnly)
 		//	printPercentage(breeds);
-		std::cout << "Percentage statistics are currently unavailable.";
-		std::cout << "Percentage statistics are unavailable in Unique Only mode.";
+		std::cout << "\nPercentage statistics are currently unavailable.";
+		std::cout << "\nPercentage statistics are unavailable in Unique Only mode.";
 	}
 }
 
@@ -306,7 +309,7 @@ int main() {
 	std::cout << "\n";
 
 	createGeneration(genotype1, genotype2);
-	std::cout << "\nPress Enter to close this window . . .";
+	std::cout << "\n\nPress Enter to close this window . . .";
 	std::cin.ignore(std::cin.rdbuf()->in_avail());
 	std::getchar();
 }
